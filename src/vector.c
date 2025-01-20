@@ -310,7 +310,6 @@ Vector* vector_copy(Vector *this, const bool shrink_to_fit) {
 
   if (!VECTOR_INTERFACE_OK(v, copy)) {
     memcpy(v->content, this->content, this->count * this->object_size);
-    v->count = this->count;
     return v;
   }
 
