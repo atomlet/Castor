@@ -323,3 +323,17 @@ Vector* vector_copy(Vector *this, const bool shrink_to_fit) {
 
   return v;
 }
+
+void* vector_get_back(const Vector *this) {
+  if (vector_empty(this)) {
+    return nullptr;
+  }
+  return vector_get_unsafe(this, this->count - 1);
+}
+
+void* vector_get_front(const Vector *this) {
+  if (vector_empty(this)) {
+    return nullptr;
+  }
+  return vector_get_unsafe(this, 0);
+}

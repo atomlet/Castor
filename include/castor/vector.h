@@ -111,3 +111,11 @@ bool vector_insert(Vector*, const usize index, void*);
 // memset.
 [[nodiscard]] 
 Vector* vector_copy(Vector*, const bool shrink_to_fit);
+
+// Returns a pointer to the last element in the vector.
+// If the vector is empty, returns nullptr.
+void* vector_get_back(const Vector *this);
+
+// Returns a pointer to the first element in the vector.
+// If the vector is empty, returns nullptr.
+void* vector_get_front(const Vector *this);
