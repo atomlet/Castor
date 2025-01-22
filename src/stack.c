@@ -3,20 +3,24 @@
 #include "castor/types.h"
 #include <stdlib.h>
 
+
 struct Stack {
   Vector* vector;
 };
 
-Stack* stack_construct(const u32 object_size, VectorOptions options) {
-  Stack* stack = NEW(Stack);
+
+Stack* stack_construct(const usize object_size, VectorOptions options) {
+  Stack* stack = calloc(1, sizeof(Stack));
   if (stack == nullptr) {
     return nullptr;
   }
+
   stack->vector = vector_construct(object_size, options);
   if (stack->vector == nullptr) {
     free(stack);
     return nullptr;
   }
+  
   return stack;
 }
 
@@ -24,6 +28,7 @@ void stack_destruct(Stack* this) {
   if (this == nullptr) {
     return;
   }
+
   vector_destruct(this->vector);
   free(this);
 }
@@ -45,14 +50,16 @@ void* stack_peek(const Stack* this) {
 }
 
 Stack* stack_copy(const Stack* this, const bool shrink_to_fit) {
-  Stack* s = NEW(Stack);
-  if (s == nullptr) {
+  Stack* clone = calloc(1, sizeof(Stack));
+  if (clone == nullptr) {
     return nullptr;
   }
-  s->vector = vector_copy(this->vector, shrink_to_fit);
-  if (s->vector == nullptr) {
-    free(s);
+
+  clone->vector = vector_copy(this->vector, shrink_to_fit);
+  if (clone->vector == nullptr) {
+    free(clone);
     return nullptr;
   }
-  return s;
+
+  return clone;
 }
